@@ -13,3 +13,8 @@ check_texts: list = [
     'Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.',
     'Да, обязательно. Всем самокатов! И Москве, и Московской области.',
 ]
+
+URLS: dict = {
+    'main_page': 'https://qa-scooter.praktikum-services.ru/',
+    'order_page': 'https://qa-scooter.praktikum-services.ru/order',
+}

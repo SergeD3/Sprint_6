@@ -6,12 +6,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 @pytest.fixture
-def locators():
-    locators = main_page_locators.Locators()
-    return locators
-
-
-@pytest.fixture
 def driver():
     driver = webdriver.Firefox()
     yield driver

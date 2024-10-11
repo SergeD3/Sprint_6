@@ -1,18 +1,14 @@
-import time
 import pytest
+import data
 
 from pages.main_page import MainPage
-from selenium.webdriver.support import expected_conditions
 
 
 class TestMainPage:
 
-    def test_dropdown_list_element_zero(self, driver, locators, wait):
+    @pytest.mark.parametrize('num', [0, 1, 2, 3, 4, 5, 6, 7])
+    def test_dropdown_list_element_zero(self, driver, num):
         main_page = MainPage(driver)
-        main_page.get_main_page()
-
-        # скроллинг до блока FAQ
-
-        # кликаю на элемент, чтобы получить текст и сравнить его с проверочным
-
-
+        main_page.scroll_to_question_and_click(num=num)
+        text = main_page.get_answer_text(num=num)
+        assert text == data.check_texts[num]
