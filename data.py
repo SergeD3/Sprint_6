@@ -18,3 +18,5 @@ URLS: dict = {
     'main_page': 'https://qa-scooter.praktikum-services.ru/',
     'order_page': 'https://qa-scooter.praktikum-services.ru/order',
 }
+
+METRO_STATIONS_FOR_INPUT = ['Лубянка', 'Сокольники', 'Бауманская']
