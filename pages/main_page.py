@@ -19,17 +19,17 @@ class MainPage(BasePage):
 
     @allure.step('Кликаю на вопрос')
     def click_to_faq_question(self, locator):
-        self.scroll_to_element_with_wait(self.locators.FAQ_LAST_QUESTION)
-        self.click_element_with_wait(locator)
+        self.scroll_to_element(self.locators.FAQ_LAST_QUESTION)
+        self.click_element(locator)
 
     @allure.step('Получаю текст ответа')
     def get_answer_text(self, num):
         locator = self.format_locators(self.locators.FAQ_ANSWER_TEMPLATE, num)
-        return self.get_element_attr(locator)
+        return self.get_text_from_element(locator)
 
     @allure.step('Прокручиваю до конца страницы')
     def scroll_to_end_with_wait(self):
-        self.scroll_to_element_with_wait(self.locators.FAQ_LAST_QUESTION)
+        self.scroll_to_element(self.locators.FAQ_LAST_QUESTION)
         self.wait.until(expected_conditions.visibility_of_element_located(self.locators.FAQ_LAST_QUESTION))
 
     @allure.step('Прокручиваю до конца страницы и кликаю по вопросу.')

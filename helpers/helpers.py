@@ -1,4 +1,5 @@
 from faker import Faker
+import random
 
 fake = Faker(locale='ru')
 
@@ -12,12 +13,17 @@ def get_last_name() -> str:
 
 
 def get_address() -> str:
-    return fake.address()
-
-
-def get_city() -> str:
-    return fake.city()
+    address = f'улица {fake.first_name()} {fake.random_int(1, 99)}'
+    return address
 
 
 def get_phone_number() -> str:
-    return fake.phone_number()
+    # Генерируем 10 случайных цифр
+    random_digits = ''.join(random.choices('0123456789', k=10))
+    # Формируем номер телефона в формате +7XXXXXXXXXX
+    phone_number = f"+7{random_digits}"
+    return phone_number
+
+
+if __name__ == '__main__':
+    print(get_address())

@@ -14,3 +14,4 @@ class TestOrderPage:
         order_page.click_order_button_in_menu()
         order_page.fill_form_fields(station)
         order_page.click_next_button()
+        assert order_page.get_text_from_rent_header() == 'Про аренду'

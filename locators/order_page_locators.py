@@ -29,3 +29,8 @@ class OrderPageLocators:
     # поле-выпадающий список Станция метро
     SELECT_SEARCH_OPTIONS = (By.XPATH, '//ul[@class="select-search__options"]')
     SELECT_ZERO_ELEMENT = (By.XPATH, '//li/button[@tabindex="-1"]')
+
+    ABOUT_RENT_HEADER = (
+        By.XPATH,
+        '//div[contains(@class, "Order_Header") and contains(text(),"Про аренду")]'
+    )

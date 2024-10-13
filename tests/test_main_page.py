@@ -1,3 +1,4 @@
+import allure
 import pytest
 import data
 
@@ -6,6 +7,7 @@ from pages.main_page import MainPage
 
 class TestMainPage:
 
+    @allure.description('Проверяю, что при клике по вопросу появляется соответствующий ответ')
     @pytest.mark.parametrize('num', [0, 1, 2, 3, 4, 5, 6, 7])
     def test_faq_questions_answers(self, driver, num):
         main_page = MainPage(driver)
