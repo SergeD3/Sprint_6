@@ -25,7 +25,7 @@ class MainPage(BasePage):
     @allure.step('Получаю текст ответа')
     def get_answer_text(self, num):
         locator = self.format_locators(self.locators.FAQ_ANSWER_TEMPLATE, num)
-        return self.get_text_from_element(locator)
+        return self.get_element_attr(locator)
 
     @allure.step('Прокручиваю до конца страницы')
     def scroll_to_end_with_wait(self):
