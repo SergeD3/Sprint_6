@@ -11,7 +11,6 @@ class MainPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.locators = MainPageLocators()
-        self.get_main_page()
 
     @allure.step('Открываю главную страницу MainPage')
     def get_main_page(self):
