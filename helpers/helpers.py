@@ -43,8 +43,3 @@ def get_date(timeline: str) -> date:
         return now_date
     else:
         print('Ошибка: укажите конкретный период времени.')
-
-
-if __name__ == '__main__':
-    text = get_date()
-    print(text[:2])

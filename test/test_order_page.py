@@ -1,3 +1,4 @@
+import allure
 import pytest
 
 
@@ -7,6 +8,8 @@ class TestOrderPage:
         [0, 'menu', 'past', 'black'],
         [1, 'main_page', 'future', 'grey']
     ])
+    @allure.title('Создание заказа с разными входными данными.')
+    @allure.description('Проверяю создание заказа с разными входными данными.')
     def test_make_order(self, main_page, order_page, station, button, timeline, color):
         main_page.get_main_page()
         order_page.click_accept_cookies()
