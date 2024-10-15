@@ -30,12 +30,21 @@ def get_phone_number() -> str:
     return phone_number
 
 
-def get_tomorrow_date():
+def get_date(timeline: str) -> date:
     """Функция возвращает текущую дату в формате dd.mm.yyyy."""
-    tomorrow_date = f'{int(date.today().day)+1}.{date.today().month}.{date.today().year}'
-    return tomorrow_date
+    if timeline == 'past':
+        past_date = f'{int(date.today().day)-2}.{date.today().month}.{date.today().year}'
+        return past_date
+    elif timeline == 'future':
+        future_date = f'{int(date.today().day)+2}.{date.today().month}.{date.today().year}'
+        return future_date
+    elif timeline == 'now':
+        now_date = f'{int(date.today().day)}.{date.today().month}.{date.today().year}'
+        return now_date
+    else:
+        print('Ошибка: укажите конкретный период времени.')
 
 
 if __name__ == '__main__':
-    text = get_tomorrow_date()
+    text = get_date()
     print(text[:2])

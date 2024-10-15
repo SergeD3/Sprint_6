@@ -56,7 +56,7 @@ class OrderPageLocators:
     RENT_DROPDOWN_MENU = (By.XPATH, '//div[@class="Dropdown-menu"]')
 
     # поле Цвет самоката
-    GREY_COLOR_CHECKBOX = (By.XPATH, '//input[@id="grey"]')  # чекбокс серая безысходность
+    COLOR_CHECKBOX = (By.XPATH, '//input[@id="{num}"]')  # чекбокс серая безысходность
 
     # поле Комментарий для курьера
     COMMENT_COURIER_INPUT = (By.XPATH, '//input[contains(@placeholder, "Комментарий для курьера")]')

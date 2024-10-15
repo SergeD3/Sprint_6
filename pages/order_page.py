@@ -23,23 +23,30 @@ class OrderPage(BasePage):
     def click_accept_cookies(self):
         self.click_element(self.locators.ACCEPT_COOKIES_BUTTON)
 
-    def click_order_button_in_menu(self):
-        self.click_element(self.locators.ORDER_BUTTON_MENU)
-        self.basic_wait_element(locator=self.locators.FIRST_NANE_INPUT, by_visibility=True)
+    def click_order_button_on_main_page(self, variant: str):
+        """Метод нажимает на одну из кнопок Заказать на главной странице. Варианты кнопок: menu, main_page"""
+        if variant == 'menu':
+            self.click_element(self.locators.ORDER_BUTTON_MENU)
+            self.basic_wait_element(locator=self.locators.FIRST_NANE_INPUT, by_visibility=True)
+        elif variant == 'main_page':
+            self.click_element(self.locators.ORDER_BUTTON_MAIN_PAGE)
+            self.basic_wait_element(locator=self.locators.FIRST_NANE_INPUT, by_visibility=True)
+        else:
+            print('Необходимо указать конкретную кнопку Заказать. Варианты: main_page, menu.')
 
     def click_order_button_in_main_page(self):
         self.click_element(self.locators.ORDER_BUTTON_MENU[1])
         self.wait.until(expected_conditions.element_to_be_clickable(self.locators.FIRST_NANE_INPUT))
 
-    def click_order_page_button(self):
+    def click_order_button(self):
         self.click_element(self.locators.ORDER_BUTTON_ORDER_PAGE)
 
     def click_next_button(self):
         self.click_element(self.locators.ORDER_NEXT_BUTTON)
         self.basic_wait_element(self.locators.ABOUT_RENT_HEADER, by_visibility=True)
 
-    def set_date_calendar_field(self):
-        date = helpers.get_tomorrow_date()
+    def set_date_calendar_field(self, timeline: str):
+        date = helpers.get_date(timeline)
         self.click_element(self.locators.WHEN_CALENDAR_INPUT)
         self.basic_wait_element(self.locators.CALENDAR_BODY, by_visibility=True)
         formated_date = self.format_locators(locator=self.locators.DATE_FOR_CALENDAR_INPUT, num=date[:2])
@@ -71,8 +78,13 @@ class OrderPage(BasePage):
         text = self.get_text_from_element(self.locators.RENT_PERIOD_INPUT)
         assert text == "трое суток"
 
-    def enable_checkbox_color_field(self):
-        self.click_element(self.locators.GREY_COLOR_CHECKBOX)
+    def enable_checkbox_color_field(self, color: str):
+        if color == 'grey':
+            grey = self.format_locators(self.locators.COLOR_CHECKBOX, color)
+            self.click_element(grey)
+        elif color == 'black':
+            black = self.format_locators(self.locators.COLOR_CHECKBOX, color)
+            self.click_element(black)
 
     def set_text_comment_field(self):
         self.add_text_to_element(self.locators.COMMENT_COURIER_INPUT, data.LOREM_TEXT)
@@ -83,7 +95,7 @@ class OrderPage(BasePage):
 
     def check_order_status_header(self):
         header_text = self.get_text_from_element(self.locators.MODAL_STATUS_HEADER)
-        assert 'Заказ оформлен' in header_text
+        return 'Заказ оформлен' in header_text
 
     def fill_form_fields_first_page(self, station_index):
         # заполняю поле Имя
@@ -98,21 +110,20 @@ class OrderPage(BasePage):
         # заполняю поле Телефон
         self.add_text_to_element(self.locators.PHONE_NUMBER_INPUT, helpers.get_phone_number())
 
-    def fill_form_fields_second_page(self):
+    def fill_form_fields_second_page(self, timeline: str, color: str):
         # заполняю поле Когда привезти самокат
-        self.set_date_calendar_field()
+        self.set_date_calendar_field(timeline)
         # заполняю поле Срок аренды
         self.set_rent_period_field()
         self.check_rent_field_text()
         # заполняю поле Цвет самоката
-        self.enable_checkbox_color_field()
+        self.enable_checkbox_color_field(color)
         # заполняю поле
         self.set_text_comment_field()
         self.check_comment_value()
 
     def finalize_order(self):
-        self.click_order_page_button()
+        self.click_order_button()
         self.basic_wait_element(self.locators.MODAL_YES_BUTTON, by_visibility=True)
         self.click_element(self.locators.MODAL_YES_BUTTON)
         self.basic_wait_element(self.locators.MODAL_STATUS_BUTTON, by_visibility=True)
-        self.check_order_status_header()
