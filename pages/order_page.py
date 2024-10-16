@@ -3,7 +3,6 @@ import data
 
 from pages.base_page import BasePage
 from locators.order_page_locators import OrderPageLocators
-from selenium.webdriver.support import expected_conditions
 from helpers import helpers
 
 
@@ -54,7 +53,7 @@ class OrderPage(BasePage):
         self.basic_wait_element(self.locators.CALENDAR_BODY, by_visibility=True)
         formated_date = self.format_locators(locator=self.locators.DATE_FOR_CALENDAR_INPUT, num=date[:2])
         self.click_element(formated_date)
-        self.wait.until_not(expected_conditions.visibility_of_element_located(self.locators.CALENDAR_BODY))
+        self.basic_wait_until_not_visibility(self.locators.CALENDAR_BODY)
         self.check_value_date_field(date)
 
     @allure.step('Сравниваю значение в поле Когда привезти самокат с ожидаемым значением.')
@@ -66,7 +65,7 @@ class OrderPage(BasePage):
     def set_metro_station_field(self, station_index: int):
         self.add_text_to_element(self.locators.METRO_STATION_INPUT, data.METRO_STATIONS_FOR_INPUT[station_index])
         self.click_element(self.locators.SELECT_ZERO_ELEMENT)
-        self.wait.until_not(expected_conditions.visibility_of_element_located(self.locators.SELECT_SEARCH_OPTIONS))
+        self.basic_wait_until_not_visibility(self.locators.SELECT_SEARCH_OPTIONS)
 
     @allure.step('Сравниваю значение в поле Станция метро с ожидаемым значением.')
     def check_value_metro_field(self, station_index: int):

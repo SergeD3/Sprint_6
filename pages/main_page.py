@@ -1,5 +1,4 @@
 import allure
-from selenium.webdriver.support import expected_conditions
 
 from pages.base_page import BasePage
 from locators.main_page_locators import MainPageLocators
@@ -29,7 +28,7 @@ class MainPage(BasePage):
     @allure.step('Прокручиваю до конца страницы')
     def scroll_to_end_with_wait(self):
         self.scroll_to_element(self.locators.FAQ_LAST_QUESTION)
-        self.wait.until(expected_conditions.visibility_of_element_located(self.locators.FAQ_LAST_QUESTION))
+        self.basic_wait_element(self.locators.FAQ_LAST_QUESTION, by_visibility=True)
 
     @allure.step('Прокручиваю до конца страницы и кликаю по вопросу.')
     def scroll_to_question_and_click(self, num):

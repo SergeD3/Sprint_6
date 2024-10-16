@@ -1,8 +1,6 @@
 import pytest
 
 from selenium import webdriver
-from selenium.webdriver.support.wait import WebDriverWait
-
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
 from pages.site_navigation import SiteNavigation
@@ -13,12 +11,6 @@ def driver():
     driver = webdriver.Firefox()
     yield driver
     driver.quit()
-
-
-@pytest.fixture
-def wait(driver):
-    wait = WebDriverWait(driver, 10)
-    return wait
 
 
 @pytest.fixture

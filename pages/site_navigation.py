@@ -9,7 +9,6 @@ class SiteNavigation(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver = driver
         self.locators = NavigationLocators()
         self.main_page_locators = MainPageLocators()
 
@@ -20,7 +19,7 @@ class SiteNavigation(BasePage):
             self.basic_wait_element(self.main_page_locators.MENU_ORDER_BUTTON, by_visibility=True)
         elif logo_type == 'yandex':
             self.click_element(self.locators.YANDEX_LOGO)
-            self.driver.switch_to.window(self.driver.window_handles[1])
+            self.basic_switch_to_opened_window()
             self.basic_wait_element(self.locators.DZEN_BUTTON_FIND, by_visibility=True)
 
     @allure.step('Сравниваю текущий url с ожидаемым')

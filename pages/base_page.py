@@ -15,6 +15,10 @@ class BasePage:
         self.driver.get(url)
         self.basic_wait_element(locator)
 
+    @allure.step('Переключаюсь на вторую открытую вкладку.')
+    def basic_switch_to_opened_window(self):
+        self.driver.switch_to.window(self.driver.window_handles[1])
+
     @allure.step('Получаю текущий url.')
     def get_current_url(self) -> str:
         return self.driver.current_url
@@ -74,3 +78,9 @@ class BasePage:
             self.wait.until(expected_conditions.element_to_be_clickable(locator))
         elif by_visibility is True and by_clickable is True:
             print('Ошибка: необходимо задавать только один способ ожидания.')
+
+    @allure.step('Ожидаю прекращение отображения элемента на странице.')
+    def basic_wait_until_not_visibility(self, locator):
+        self.wait.until_not(expected_conditions.visibility_of_element_located(locator))
+
+
